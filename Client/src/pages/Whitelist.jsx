@@ -14,7 +14,7 @@ function Whitelist() {
     const [isTweetPosted, setIsTweetPosted] = useState(false);
     const [responseObj, setResponseObj] = useState(null); // State to store the response object
 
-    const referralId =responseObj._id
+    const referralId =responseObj.id
 
 
     const connectWallet = async ()=> {
