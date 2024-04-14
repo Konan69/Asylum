@@ -11,11 +11,12 @@ function Whitelist() {
     const [connected, setConnected] = useState(false);
     const [isTwitterFollowed, setIsTwitterFollowed] = useState(false);
     const [isPostLiked, setIsPostLiked] = useState(false);
+    const [BP, setBP] = useState(0)
     const [isTweetPosted, setIsTweetPosted] = useState(false);
-    const [responseObj, setResponseObj] = useState(null); // State to store the response object
+    const [responseObj, setResponseObj] = useState(''); // State to store the response object
 
     const referralId =responseObj.id
-
+  
 
     const connectWallet = async ()=> {
       if (!connected) {
@@ -27,7 +28,7 @@ function Whitelist() {
         setConnected(true);
         setWalletAddress(_walletAddress);
 
-        // Make the post request to save the wallet address
+      // Make the post request to save the wallet address
       const response = await axios.post('http://localhost:8080/api/users', { wallet: _walletAddress });
       if (response.status === 200) {
         console.log('Wallet address saved successfully.');
