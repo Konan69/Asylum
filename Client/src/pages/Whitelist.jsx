@@ -1,17 +1,49 @@
 import React, { useState, useEffect } from "react";
+import {ethers} from 'ethers'
 import axios from 'axios';
 
 function Whitelist() {
     // State to store the wallet address and points
-    const storedWallet = window.localStorage.getItem('wallet');
+    
 
     const [points, setPoints] = useState(0);
     const [wallet, setWalletAddress] = useState('');
+    const [connected, setConnected] = useState(false);
     const [isTwitterFollowed, setIsTwitterFollowed] = useState(false);
     const [isPostLiked, setIsPostLiked] = useState(false);
     const [isTweetPosted, setIsTweetPosted] = useState(false);
-    const [referralId, setReferralId] = useState(null); // Define referralId state
+    const [responseObj, setResponseObj] = useState(null); // State to store the response object
 
+    const referralId =responseObj._id
+
+
+    const connectWallet = async ()=> {
+      if (!connected) {
+      try{
+        // Connect the wallet using ethers.js
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const _walletAddress = await signer.getAddress();
+        setConnected(true);
+        setWalletAddress(_walletAddress);
+
+        // Make the post request to save the wallet address
+      const response = await axios.post('http://localhost:8080/api/users', { wallet: _walletAddress });
+      if (response.status === 200) {
+        console.log('Wallet address saved successfully.');
+        setResponseObj(response.data)
+      }
+    } catch (error) {
+      console.error('Error connecting wallet:', error);
+    }
+      } else {
+        // Disconnect the wallet
+        window.ethereum.selectedAddress = null;
+        setConnected(false);
+        setWalletAddress("");
+      }
+
+    }
     useEffect(() => {
         const storedPoints = localStorage.getItem('points');
         if (storedPoints !== null) {
@@ -22,55 +54,17 @@ function Whitelist() {
     }, []);
 
     useEffect(() => {
-      const fetchWalletId = async () => {
-          try {
-              const response = await axios.get('http://localhost:8080/api/users/getid', {
-                  params: {
-                    wallet: storedWallet
-                  }
-              });
-              setReferralId(response.data._id);
-              console.log(response.data);
-          } catch (error) {
-              console.error('Error fetching wallet ID:', error);
-          }
-      };
-  
-      if (storedWallet) {
-          fetchWalletId();
+      if (responseObj !== null) {
+        console.log(responseObj);
       }
-  }, [storedWallet])
-
-    const handleSubmit = async (event) => { 
-        event.preventDefault(); 
-        if (wallet.length !== 42 ) {
-            alert('Invalid address')
-        } else {
-            try {
-                const response = await axios.post('http://localhost:8080/api/users',{wallet: wallet});
-                if (response.status === 200) {
-                    window.localStorage.setItem('wallet', wallet);
-                }
-                console.log(response.data);
-            } catch (error) {
-                console.error('Error:', error);
-            } 
-        }
-    };
-  
-    const handleChange = (event) => {
-        setWalletAddress(event.target.value);
-    };
-
+    }, [responseObj]);
+    
     const handleTwitterFollow = () => {
       if (!isTwitterFollowed) {
         alert('Please Follow before joining');
         setIsTwitterFollowed(true);
         setPoints(prevPoints => prevPoints + 1);
         localStorage.setItem('points', (points + 1).toString());
-    }
-    if (!isTwitterFollowed) {
-
     }
     };
 
@@ -99,10 +93,10 @@ function Whitelist() {
 
     return (
         <div>
-            {storedWallet ? (
+            {connected ? (
                 <div>
-                    <p>Your wallet is: {storedWallet}</p>
-                    <p>your referralId is :{referralId}</p>
+                    <p>Your wallet is: {wallet}</p>
+                    <p>your referralId is : {referralId}</p>
                     <p> BP : {points}</p>
                     <p>Complete the tasks to obtain whitelist</p>
                     <div className="tasks">
@@ -118,20 +112,8 @@ function Whitelist() {
             ) 
             :
             <div className="wallet">
-                <header className="App-header">
-                    <form onSubmit={handleSubmit}>
-                        <label>
-                            Wallet Address:
-                            <input
-                                type="text"
-                                placeholder="Enter wallet address"
-                                value={wallet}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <button type="submit">Submit</button>
-                    </form>
-                </header>
+            <button className="btn" onClick={connectWallet}> Connect Wallet
+          </button>
             </div>
             }
         </div>

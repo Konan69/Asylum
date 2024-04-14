@@ -7,18 +7,32 @@ router.get("/", async(req,res)=>{
   res.send({hi : "hello"})
 })
 
+// Route handler for connecting wallet
 router.post("/", async(req,res) =>{
-  let user = new User({
-  wallet: req.body.wallet,
-  referrals: req.body.referrals,
-  points: req.body.points
-  })
-  user = await user.save()
+  try {
+    const { wallet } = req.body;
 
-  if(!user) return res.status(400).send('user cannot be created ')
+    // Check if the wallet address already exists
+    const existingUser = await User.findOne({ wallet });
 
-  res.send(user)
-})
+    if (existingUser) {
+      // Wallet address already exists
+      return res.status(200).json(existingUser);
+    } else {
+      // Wallet address doesn't exist, create a new document
+      const newUser = new User({
+        wallet: req.body.wallet,
+        referrals: req.body.referrals,
+        points: req.body.points
+      });
+      await newUser.save();
+      return res.status(200).json(newUser);
+    }
+  } catch (error) {
+    console.error('Error connecting wallet:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
 router.get('/getid', async (req, res) => {
   const { wallet } = req.query;
   try {
