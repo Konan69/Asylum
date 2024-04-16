@@ -16,6 +16,21 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required:true,
     default: 9
+  },
+  TwitterFollowed : {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  PostLiked : {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  TweetPosted: {
+    type: Boolean,
+    required: true,
+    default: false,
   }
 })
 
