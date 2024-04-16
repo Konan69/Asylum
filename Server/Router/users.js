@@ -70,43 +70,6 @@ router.post("/", async (req, res) => {
 });
 
 
-//api endpoint for updating refewrral invit c  ve points on new registrations
-// router.post("/:id", async (req, res) => {
-//   const id = req.query; 
-//   console.log(id)
-//   try {
-//     //signup with referral
-//     const { wallet } = req.body;
-//     console.log(wallet)
-//     const inviter = await User.findOne({_id : id});
-//     console.log(inviter)
-//     const invited = await User.findOne({ wallet });
-
-//     //IF unvited user doesnt exist create their account in db and 
-//     //log them in and add points to inviter
-//     if (!invited) {
-//     const newUser = new User({wallet: req.body.wallet})
-//     await newUser.save();
-    
-//     const updatedInviter = await User.findOneAndUpdate({_id : id}, { $inc: { referrals: 1 } }, { new: true })
-//     console.log(updatedInviter)
-
-//     return res.status(200).json(newUser)
-    
-//     }else {
-//     // Check if the invited doe exists in db , log them in ;
-//     return res.status(200).json(invited)
-//     };
-//     // add error habdling for wrong invite code
-     
-//   } catch (error) {
-//     console.error('Error adding referral point:', error);
-//     return res.status(500).json({ error: 'Internal server error' });
-//   }
-//   // }
-  
-// })
-
 router.post('/addpoints', async (req, res) => {
  try { 
   const { wallet } = req.body
@@ -126,7 +89,21 @@ router.post('/addpoints', async (req, res) => {
 })
 
 
-router.post('/updatetask')
+router.post('/updatetask', async (req, res) => {
+  const task = req.body.taskName
+  const wallet = req.body.wallet
+
+  const updateObj = {};
+  updateObj[task] = true;
+  console.log(updateObj)
+
+  const updatedTask = await User.findOneAndUpdate({ wallet: wallet }, updateObj,{ new: true }
+  );
+  console.log(updatedTask)
+  return res.status(200).json(updatedTask)
+  
+})
+
 router.get('/')
 
 module.exports = router

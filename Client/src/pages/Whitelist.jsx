@@ -5,21 +5,17 @@ import axios from 'axios';
 
 function Whitelist() {
     // State to store the wallet address and points
-    const [points, setPoints] = useState(0);
     const [wallet, setWalletAddress] = useState('');
     const [connected, setConnected] = useState(false);
-    const [isTwitterFollowed, setIsTwitterFollowed] = useState(false);
-    const [isPostLiked, setIsPostLiked] = useState(false);
     const [BP, setBP] = useState()
-    const [isTweetPosted, setIsTweetPosted] = useState(false);
-    const [responseObj, setResponseObj] = useState(''); // State to store the response object
+    const [responseObj, setResponseObj] = useState({}); // State to store the response object
 
     const referralId = responseObj?.id;
     const location = useLocation();
     const referralLink = `https://localhost:5173/whitelist?r=${referralId}`
     const queryParams = new URLSearchParams(location.search);
     const r = queryParams.get('r'); // Accessing the query parameter 'r'
-    console.log(responseObj["TweetPosted"])
+    // console.log(responseObj["TwitterFollowed"])
 
     const connectWallet = async ()=> {
       if (!connected) {
@@ -39,15 +35,14 @@ function Whitelist() {
         console.log('Wallet address saved successfully.');
         setResponseObj(response.data)
         setBP(response.data.points)
-        console.log(id)
       }
     } catch (error) {
       console.error('Error connecting wallet:', error);
     }
       } else {
-        // Disconnect the wallet
-        window.ethereum.selectedAddress = null;
-        setConnected(false);
+        // // Disconnect the wallet
+        // window.ethereum.selectedAddress = null;
+        // setConnected(false);
       }
 
     }
@@ -64,58 +59,50 @@ function Whitelist() {
         console.error('Error adding points', error);
       }
     }
+
     // logic to handle db commpletion of task and saving state
-    // const handleTaskCompletion = async (taskName, setIsCompleted) => {
-    //   try {
-    //     if (responseObj.data[taskName] == false) {
-    //       console.log()
-    //     }
-    //     // Assuming the backend response contains a property indicating task completion
-    //     const isTaskCompleted = response.data[taskName];
-    //     // Update the state based on the task completion status
-    //     setIsCompleted(isTaskCompleted);
-    
-    //     // If the task is not completed, you can perform additional actions
-    //     if (!isTaskCompleted) {
-    //       const completeTask = async () => await axios.post(`http://localhost:8080/api/users/updatetask?=${taskName}`)
-    //       // Perform additional actions such as showing an alert or adding points
-    //       if (taskName === "TwitterFollowed") {
-    //         alert('Please Follow before joining');
-    //         completeTask()
-    //         addPoints(); // Example function to add points
-    //       } else if (taskName === "PostLiked") {
-    //         alert('Please Like + RT before claiming');
-    //         completeTask()
-    //         addPoints();
-    //       } else if (taskName === "TweetPosted") {
-    //         alert('Please Post before claiming');
-    //         completeTask()
-    //         addPoints();
-    //       }
-    //     }
-    //   } catch (error) {
-    //     console.error(`Error checking task "${taskName}":`, error);
-    //   }
-    // };
-    const handleTwitterFollow = () => {
-      if (!isTwitterFollowed) {
-        alert('Please Follow before joining');
-        addPoints()
-        setIsTwitterFollowed(true);
+    const handleTaskCompletion = async (taskName) => {
+      try {
+        // perform action
+          const completeTask = async () => await axios.post('http://localhost:8080/api/users/updatetask', {wallet: wallet, taskName : taskName})
+          // Perform additional actions such as showing an alert or adding points
+          if (taskName === "TwitterFollowed") {
+            alert('Please Follow before joining');
+            completeTask()
+            addPoints(); // Example function to add points
+            setResponseObj(completeTask.data)
+          } else if (taskName === "PostLiked") {
+            alert('Please Like + RT before claiming');
+            completeTask()
+            addPoints();
+            setResponseObj(completeTask.data)
+          } else if (taskName === "TweetPosted") {
+            alert('Please Post before claiming');
+            completeTask()
+            addPoints();
+            setResponseObj(completeTask.data)
+          }
+      } catch (error) {
+        console.error(`Error checking task "${taskName}":`, error);
+      }
+    };
+
+
+    const handleTwitterFollow = async () => {
+      if (!responseObj["TwitterFollowed"]) {
+        await handleTaskCompletion("TwitterFollowed")
     }
     };
 
     const handleIsPostLiked = () => {
-        if (!isPostLiked) {
-            alert('Please Like + RT before claiming');
-            setIsPostLiked(true);
+        if (!responseObj["PostLiked"]) {
+          handleTaskCompletion("PostLiked")
         }
     };
 
     const handleIsTweetPosted = () => {
-        if (!isTweetPosted) {
-        alert('Please Post before claiming');
-        setIsTweetPosted(true);
+        if (!responseObj["TweetPosted"]) {
+          handleTaskCompletion("PostLiked")
         }
     };
 
