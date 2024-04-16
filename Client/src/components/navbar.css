@@ -3,9 +3,17 @@
   top:0;
   left:0;
   width: 100%;
-  padding: 20px;
+  padding: 0%;
+  background-color: rgb(31, 153, 240);
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
 }
 
 .basebound {
   display:inline-block;
+}
+
+.navbar a {
+  margin-left: 10px;
 }

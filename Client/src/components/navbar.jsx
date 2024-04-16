@@ -7,7 +7,7 @@ function Navbar() {
    
   return (
     <header class = 'header'>
-  <div className="navbar">
+    <div className="navbar">
     <p className="basebound"> BaseBound </p>
     <Link to ="/">Home</Link>
     <a href = "#"> NFT</a>
