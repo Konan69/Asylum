@@ -106,6 +106,26 @@ router.post("/", async (req, res) => {
 //   // }
   
 // })
+
+router.post('/addpoints', async (req, res) => {
+ try { 
+  const { wallet } = req.body
+    const user = await User.findOne({ wallet });
+    console.log(user)
+    const updateduser = await User.findOneAndUpdate(
+      { wallet },
+      { $inc: { points: 1 } },
+      { new: true }
+    )
+    console.log(updateduser)
+    res.send(updateduser)
+  } catch(error) {
+    console.log(error)
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+})
+
+
 router.get('/getid', async (req, res) => {
   const { wallet } = req.query;
   try {
@@ -116,7 +136,7 @@ router.get('/getid', async (req, res) => {
       if (result) {
           // If wallet is found, return its _id
           res.json({ _id: result._id });
-      } else {
+      } else { 
           // If wallet is not found, return a 404 status
           res.status(404).json({ error: 'Wallet not found' });
       }

@@ -5,19 +5,17 @@ import axios from 'axios';
 
 function Whitelist() {
     // State to store the wallet address and points
-
     const [points, setPoints] = useState(0);
     const [wallet, setWalletAddress] = useState('');
     const [connected, setConnected] = useState(false);
     const [isTwitterFollowed, setIsTwitterFollowed] = useState(false);
     const [isPostLiked, setIsPostLiked] = useState(false);
-    const [BP, setBP] = useState(0)
+    const [BP, setBP] = useState()
     const [isTweetPosted, setIsTweetPosted] = useState(false);
     const [responseObj, setResponseObj] = useState(''); // State to store the response object
 
     const referralId = responseObj?.id;
     const location = useLocation();
-    console.log(referralId)
     const referralLink = `https://localhost:5173/whitelist?r=${referralId}`
     const queryParams = new URLSearchParams(location.search);
     const r = queryParams.get('r'); // Accessing the query parameter 'r'
@@ -39,6 +37,7 @@ function Whitelist() {
       if (response.status === 200) {
         console.log('Wallet address saved successfully.');
         setResponseObj(response.data)
+        setBP(response.data.points)
         console.log(id)
       }
     } catch (error) {
@@ -48,40 +47,62 @@ function Whitelist() {
         // Disconnect the wallet
         window.ethereum.selectedAddress = null;
         setConnected(false);
-        setWalletAddress("");
       }
 
     }
-    useEffect(() => {
-        const storedPoints = localStorage.getItem('points');
-        if (storedPoints !== null) {
-            setPoints(parseInt(storedPoints));
-        } else {
-            localStorage.setItem('points', '0');
-        }
-    }, []);
 
-    useEffect(() => {
-      if (responseObj !== null) {
-        console.log(responseObj);
+    const addPoints = async () => {
+      try {
+      const AP = await axios.post("http://localhost:8080/api/users/addpoints", { wallet: wallet} )
+      if (AP.status === 200) {
+        console.log('points added');
+        setBP(AP.data.points)
+        console.log( AP.data.points)
       }
-    }, [responseObj]);
+      } catch (error) {
+        console.error('Error adding points', error);
+      }
+    }
+    // logic to handle db commpletion of task and saving state
+    const handleTaskCompletion = async (taskName, setIsCompleted) => {
+      try {
+        // Make a backend request to check if the task is completed
+        const response = await axios.get(`https://your-backend-url/check-task?task=${taskName}`);
+        
+        // Assuming the backend response contains a property indicating task completion
+        const isTaskCompleted = response.data[taskName];
     
+        // Update the state based on the task completion status
+        setIsCompleted(isTaskCompleted);
+    
+        // If the task is not completed, you can perform additional actions
+        if (!isTaskCompleted) {
+          // Perform additional actions such as showing an alert or adding points
+          if (taskName === "TwitterFollowed") {
+            alert('Please Follow before joining');
+            addPoints(); // Example function to add points
+          } else if (taskName === "PostLiked") {
+            alert('Please Like + RT before claiming');
+          } else if (taskName === "TweetPosted") {
+            alert('Please Post before claiming');
+          }
+        }
+      } catch (error) {
+        console.error(`Error checking task "${taskName}":`, error);
+      }
+    };
     const handleTwitterFollow = () => {
       if (!isTwitterFollowed) {
         alert('Please Follow before joining');
+        addPoints()
         setIsTwitterFollowed(true);
-        setPoints(prevPoints => prevPoints + 1);
-        localStorage.setItem('points', (points + 1).toString());
     }
     };
 
     const handleIsPostLiked = () => {
         if (!isPostLiked) {
             alert('Please Like + RT before claiming');
-            setIsPostLiked(true);0
-            setPoints(prevPoints => prevPoints + 1);
-            localStorage.setItem('points', (points + 1).toString());
+            setIsPostLiked(true);
         }
     };
 
@@ -89,15 +110,14 @@ function Whitelist() {
         if (!isTweetPosted) {
         alert('Please Post before claiming');
         setIsTweetPosted(true);
-        setPoints(prevPoints => prevPoints + 1);
-        localStorage.setItem('points', (points + 1).toString());  
         }
     };
+
     const handleCopyToClipboard = (content) => {
       navigator.clipboard.writeText(content)
           .then(() => alert('Copied to clipboard'))
           .catch((error) => console.error('Error copying to clipboard:', error));
-  };
+    };
 
     return (
         <div>
@@ -105,7 +125,7 @@ function Whitelist() {
                 <div>
                     <p>Your wallet is: {wallet}</p>
                     <p>your referralId is : {referralId}</p>
-                    <p> BP : {points}</p>
+                    <p> BP : {BP}</p>
                     <p>Complete the tasks to obtain whitelist</p>
                     <div className="tasks">
                         <p className="task-items">Follow <a href="https://x.com/doge_on__base/status/1777039882956706172" onClick={handleTwitterFollow} target="_blank" rel="noopener noreferrer" className='link'>Basebound</a> on X <p>+1 BP</p></p>
