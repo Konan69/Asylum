@@ -34,8 +34,8 @@ function Whitelist() {
         
         console.log(r)
 
-      // Make the post request to save the wallet address normally 
-      const response = await axios.post('http://localhost:8080/api/users', { wallet: _walletAddress });
+      // Make the post request to save the wallet address
+      const response = await axios.post(`http://localhost:8080/api/users/`, { wallet: _walletAddress }, {params: {r : r}});
       if (response.status === 200) {
         console.log('Wallet address saved successfully.');
         setResponseObj(response.data)
