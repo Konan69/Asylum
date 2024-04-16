@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import {ethers} from 'ethers'
 import axios from 'axios';
 
 function Whitelist() {
     // State to store the wallet address and points
-    
 
     const [points, setPoints] = useState(0);
     const [wallet, setWalletAddress] = useState('');
@@ -15,8 +15,12 @@ function Whitelist() {
     const [isTweetPosted, setIsTweetPosted] = useState(false);
     const [responseObj, setResponseObj] = useState(''); // State to store the response object
 
-    const referralId =responseObj.id
-  
+    const referralId = responseObj?.id;
+    const location = useLocation();
+    console.log(referralId)
+    const referralLink = `https://localhost:5173/whitelist?r=${referralId}`
+    const queryParams = new URLSearchParams(location.search);
+    const r = queryParams.get('r'); // Accessing the query parameter 'r'
 
     const connectWallet = async ()=> {
       if (!connected) {
@@ -27,12 +31,15 @@ function Whitelist() {
         const _walletAddress = await signer.getAddress();
         setConnected(true);
         setWalletAddress(_walletAddress);
+        
+        console.log(r)
 
-      // Make the post request to save the wallet address
+      // Make the post request to save the wallet address normally 
       const response = await axios.post('http://localhost:8080/api/users', { wallet: _walletAddress });
       if (response.status === 200) {
         console.log('Wallet address saved successfully.');
         setResponseObj(response.data)
+        console.log(id)
       }
     } catch (error) {
       console.error('Error connecting wallet:', error);
@@ -101,12 +108,12 @@ function Whitelist() {
                     <p> BP : {points}</p>
                     <p>Complete the tasks to obtain whitelist</p>
                     <div className="tasks">
-                        <p className="task-items">Follow <a href="https://x.com/doge_on__base/status/1777039882956706172" onClick={handleTwitterFollow} target="_blank" rel="noopener noreferrer" className='link'>Basebound</a> on X</p>
-                        <p className="task-items">Repost and like this <a href="https://x.com/doge_on__base/status/1777039882956706133" onClick={handleIsPostLiked} target="_blank" rel="noopener noreferrer" className='link'>Post</a> on X</p>
-                        <p className="task-items"><a href="https://x.com/doge_on__base/status/1777039882956706133" onClick={handleIsTweetPosted} target="_blank" rel="noopener noreferrer" className='link'>Post </a>about us on X</p>
+                        <p className="task-items">Follow <a href="https://x.com/doge_on__base/status/1777039882956706172" onClick={handleTwitterFollow} target="_blank" rel="noopener noreferrer" className='link'>Basebound</a> on X <p>+1 BP</p></p>
+                        <p className="task-items">Repost and like this <a href="https://x.com/doge_on__base/status/1777039882956706133" onClick={handleIsPostLiked} target="_blank" rel="noopener noreferrer" className='link'>Post </a> on X <p>+1 BP</p></p>
+                        <p className="task-items"><a href="https://x.com/doge_on__base/status/1777039882956706133" onClick={handleIsTweetPosted} target="_blank" rel="noopener noreferrer" className='link'>Post </a>about us on X <p>+1 BP</p></p>
                         <p className="task-items">Refer friends to join Basebound [1 bp per successful invite]
-                        <button onClick={() => handleCopyToClipboard(storedWallet)}>
-                            <img src="copy-icon.png" alt="Copy to Clipboard" />
+                        <button onClick={() => handleCopyToClipboard(referralLink)}>
+                          <img src="copy-icon.png" alt="Copy to Clipboard" />
                         </button> </p>
                     </div>
                 </div>

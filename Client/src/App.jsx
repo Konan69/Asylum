@@ -8,6 +8,8 @@ import {
   Link,
 } from "react-router-dom"
 
+// import 
+
 import Whitelist from './pages/Whitelist'
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
@@ -32,17 +34,17 @@ const router = createBrowserRouter([
     {
       path: "/whitelist",
       element: <Whitelist/>
-    }
+    },
+    // {
+    //   path: "/whitelist/r/:id", // Define the dynamic parameter ":id"
+    //   element: <Whitelist/> // Render the Whitelist component
+    // }
   ]
   },
   {
     path:'/',
     element: <Home/>
   },
-  {
-    path:"/whitelist",
-    element:<Whitelist/>,
-  }
 ])
 
 

@@ -33,12 +33,14 @@ router.post("/", async(req,res) =>{
   }
 });
 
-//api endpoint for updating refewrral invite points on new registrations
+//api endpoint for updating refewrral invit c  ve points on new registrations
 router.post("/r/:id", async (req, res) => {
   try {
     const id = req.params.id;
+    console.log(id)
     const { wallet } = req.body;
-    const inviter = await User.findOne({ id });
+    const inviter = await User.findOne({_id : id});
+    console.log(inviter)
     const invited = await User.findOne({ wallet });
 
     //IF unvited user doesnt exist create their account in db and 
@@ -46,8 +48,11 @@ router.post("/r/:id", async (req, res) => {
     if (!invited) {
     const newUser = new User({wallet: req.body.wallet})
     await newUser.save();
-    User.findByIdAndUpdate(id, { $inc: { refferals: 1 } }, { new: true })
-    return res.status(200).json(invited)
+    
+    const updatedInviter = await User.findOneAndUpdate({_id : id}, { $inc: { referrals: 1 } }, { new: true })
+    console.log(updatedInviter)
+
+    return res.status(200).json(newUser)
     
     }else {
     // Check if the invited doe exists in db , log them in ;
