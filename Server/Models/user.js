@@ -31,6 +31,11 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+  Whitelist: {
+    type:  Boolean,
+    required: true,
+    default: false
   }
 })
 

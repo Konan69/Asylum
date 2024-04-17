@@ -3,14 +3,20 @@ import { useLocation } from "react-router-dom";
 import {ethers} from 'ethers'
 import axios from 'axios';
 
+import '../Styles/whitelist.css'
+
 function Whitelist() {
     // State to store the wallet address and points
     const [wallet, setWalletAddress] = useState('');
     const [connected, setConnected] = useState(false);
     const [BP, setBP] = useState()
-    const [responseObj, setResponseObj] = useState({}); // State to store the response object
+    const [responseObj, setResponseObj] = useState({});
+    const [showClaimedDiv, setShowClaimedDiv] = useState(false);
+    const [showAlreadyWl, setShowAlreadywl] = useState(false);
+    const [showNotEnoughPointsDiv, setShowNotEnoughPointsDiv] = useState(false);
 
     const referralId = responseObj?.id;
+    const whitelistStatus = responseObj?.Whitelist
     const location = useLocation();
     const referralLink = `https://localhost:5173/whitelist?r=${referralId}`
     const queryParams = new URLSearchParams(location.search);
@@ -60,49 +66,53 @@ function Whitelist() {
       }
     }
 
-    // logic to handle db commpletion of task and saving state
-    const handleTaskCompletion = async (taskName) => {
-      try {
-        // perform action
-          const completeTask = async () => await axios.post('http://localhost:8080/api/users/updatetask', {wallet: wallet, taskName : taskName})
-          // Perform additional actions such as showing an alert or adding points
-          if (taskName === "TwitterFollowed") {
-            alert('Please Follow before joining');
-            completeTask()
-            addPoints(); // Example function to add points
-            setResponseObj(completeTask.data)
-          } else if (taskName === "PostLiked") {
-            alert('Please Like + RT before claiming');
-            completeTask()
-            addPoints();
-            setResponseObj(completeTask.data)
-          } else if (taskName === "TweetPosted") {
-            alert('Please Post before claiming');
-            completeTask()
-            addPoints();
-            setResponseObj(completeTask.data)
+    const claimWhitelist = async () => {
+      if(!whitelistStatus) {
+        if (responseObj.points >= 15 ){
+          try {
+          const updateWl = await axios.post(`http://localhost:8080/api/users/claim-wl`, { wallet: wallet })
+          if (updateWl.status === 200) {
+          console.log('whitelist updated.');
+          setShowClaimedDiv(true)
+          }        
+          } catch (error) {
+            console.log({'error caliming wl ':error})
           }
-      } catch (error) {
-        console.error(`Error checking task "${taskName}":`, error);
+        } else {
+        setShowNotEnoughPointsDiv(true); 
+        }
+      } else {
+        setShowAlreadywl(true)
       }
-    };
+    } 
 
+   
+
+    // logic to handle db commpletion of task and saving stat
+  const completeTask =  async (taskName) => {
+        const result = await axios.post('http://localhost:8080/api/users/updatetask', {wallet: wallet, taskName : taskName})
+        addPoints()
+        setResponseObj(result.data)
+      }
 
     const handleTwitterFollow = async () => {
       if (!responseObj["TwitterFollowed"]) {
-        await handleTaskCompletion("TwitterFollowed")
+        alert('Please Follow before joining');
+        completeTask("TwitterFollowed")
     }
     };
 
-    const handleIsPostLiked = () => {
+    const handleIsPostLiked = async () => {
         if (!responseObj["PostLiked"]) {
-          handleTaskCompletion("PostLiked")
+          alert('Please Like + RT before claiming');
+          completeTask("PostLiked")
         }
     };
 
-    const handleIsTweetPosted = () => {
+    const handleIsTweetPosted = async () => {
         if (!responseObj["TweetPosted"]) {
-          handleTaskCompletion("PostLiked")
+          alert('Please Post before claiming');
+          completeTask("TweetPosted")
         }
     };
 
@@ -121,14 +131,24 @@ function Whitelist() {
                     <p> BP : {BP}</p>
                     <p>Complete the tasks to obtain whitelist</p>
                     <div className="tasks">
-                        <p className="task-items">Follow <a href="https://x.com/doge_on__base/status/1777039882956706172" onClick={handleTwitterFollow} target="_blank" rel="noopener noreferrer" className='link'>Basebound</a> on X <p>+1 BP</p></p>
-                        <p className="task-items">Repost and like this <a href="https://x.com/doge_on__base/status/1777039882956706133" onClick={handleIsPostLiked} target="_blank" rel="noopener noreferrer" className='link'>Post </a> on X <p>+1 BP</p></p>
-                        <p className="task-items"><a href="https://x.com/doge_on__base/status/1777039882956706133" onClick={handleIsTweetPosted} target="_blank" rel="noopener noreferrer" className='link'>Post </a>about us on X <p>+1 BP</p></p>
-                        <p className="task-items">Refer friends to join Basebound [1 bp per successful invite]
+                        <div className="task-items">Follow <a href="https://x.com/doge_on__base/status/1777039882956706172" onClick={handleTwitterFollow} target="_blank" rel="noopener noreferrer" className='link'>Basebound</a> on X</div> <div className="BP">+1 BP</div> </div>
+                    <div className="tasks">
+                        <div className="task-items">Repost and like this <a href="https://x.com/doge_on__base/status/1777039882956706133" onClick={handleIsPostLiked} target="_blank" rel="noopener noreferrer" className='link'>Post </a> on X</div>  <div className="BP">+1 BP</div></div>
+                    <div className="tasks">
+                        <div className="task-items"><a href="https://x.com/doge_on__base/status/1777039882956706133" onClick={handleIsTweetPosted} target="_blank" rel="noopener noreferrer" className='link'>Post </a>about us on X </div>  <div className="BP">+1 BP</div></div>
+                    <div className="tasks">
+                        <div className="task-items">Refer friends to join Basebound [1 bp per successful invite]
                         <button onClick={() => handleCopyToClipboard(referralLink)}>
                           <img src="copy-icon.png" alt="Copy to Clipboard" />
-                        </button> </p>
+                        </button> </div>
                     </div>
+                    <div className="cliaim">
+                       <button className ="btn" onClick={claimWhitelist}> claim Whitelist </button>
+                       {showClaimedDiv && <div style={{ marginTop: '10px' }}>Whitelist claimed</div>}
+                       {showNotEnoughPointsDiv && <div style={{ marginTop: '10px' }}>Not enough points to claim whitelist</div>}
+                       {showAlreadyWl && <div style={{ marginTop: '10px' }}>Wallet Already Whitelisted</div>}
+                    </div>
+                   
                 </div>
             ) 
             :

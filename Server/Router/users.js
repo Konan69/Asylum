@@ -25,10 +25,11 @@ router.post("/", async (req, res) => {
         if (!invited) {
           const newUser = new User({ wallet });
           await newUser.save();
-
+          
+          // add points to inviter
           const updatedInviter = await User.findOneAndUpdate(
             { _id: r },
-            { $inc: { referrals: 1 } },
+            { $inc: { referrals: 1, points: 1 } },
             { new: true }
           );
           console.log(updatedInviter);
@@ -102,6 +103,15 @@ router.post('/updatetask', async (req, res) => {
   console.log(updatedTask)
   return res.status(200).json(updatedTask)
   
+})
+
+router.post('/claim-wl', async(req,res) => {
+  const wallet = req.body.wallet
+  const updatdeWl = await User.findOneAndUpdate(
+    { wallet: wallet },
+    {Whitelist: true},
+    { new: true },)
+  return res.status(200).json(updatdeWl)
 })
 
 router.get('/')
