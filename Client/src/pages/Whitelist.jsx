@@ -144,8 +144,8 @@ function Whitelist() {
                         <div className="copy-icon" onClick={ () => handleCopyToClipboard(referralLink)}><FaRegCopy /></div></div>
                        </div>
                     </div>
-                    <div className="cliaim">
-                       <button className ="btn" onClick={claimWhitelist}> claim Whitelist </button>
+                    <div className="claim-btn">
+                       <button className ="claimWhitelist" onClick={claimWhitelist}> claim Whitelist </button>
                        {showClaimedDiv && <div style={{ marginTop: '10px' }}>Whitelist claimed</div>}
                        {showNotEnoughPointsDiv && <div style={{ marginTop: '10px' }}>Not enough points to claim whitelist</div>}
                        {showAlreadyWl && <div style={{ marginTop: '10px' }}>Wallet Already Whitelisted</div>}

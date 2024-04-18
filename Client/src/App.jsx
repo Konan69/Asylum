@@ -13,12 +13,14 @@ import {
 import Whitelist from './pages/Whitelist'
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 const Dashboard = () =>{
   return (
     <div>
       <Navbar/>
       <Outlet/>
+      <Footer/>
     </div>
   )
 }
@@ -49,6 +51,11 @@ const router = createBrowserRouter([
 
 
 function App() {
+
+  if (window.location.pathname === '/') {
+    import('mdb-react-ui-kit/dist/css/mdb.min.css').catch((err) => console.error('Failed to import MDB UI kit CSS:', err))
+  }
+
   return (
     <>
       <div className ="App">
