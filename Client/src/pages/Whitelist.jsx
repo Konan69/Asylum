@@ -129,7 +129,10 @@ function Whitelist() {
                     <p>Your wallet is: {wallet}</p>
                     <p>your referralId is : {referralId}</p>
                     <p> BP : {BP}</p>
-                    <div className="complete">Complete the tasks to obtain whitelist</div>
+                    <div className="Claim"> Claim Boundlist</div>
+                    <div className="complete">Complete task to obtain whitelist. Must have at least 15 BP(BoundPoints) to be eligible to mint NFT</div>
+
+                    <div className= "alltasks">
                     <div className="tasks">
                         <div className="task-items">Follow <a href="https://x.com/doge_on__base/status/1777039882956706172" onClick={handleTwitterFollow} target="_blank" rel="noopener noreferrer" className='link'>Basebound</a> on X</div> <div className="BP">+1 BP</div> </div>
                     <div className="tasks">
@@ -141,6 +144,7 @@ function Whitelist() {
                         <button onClick={() => handleCopyToClipboard(referralLink)}>
                           <img src="copy-icon.png" alt="Copy to Clipboard" />
                         </button> </div>
+                       </div>
                     </div>
                     <div className="cliaim">
                        <button className ="btn" onClick={claimWhitelist}> claim Whitelist </button>
