@@ -124,12 +124,12 @@ function Whitelist() {
 
     return (
         <div>
-            {connected ? (
+            {/* {connected ? ( */}
                 <div>
                     <p>Your wallet is: {wallet}</p>
                     <p>your referralId is : {referralId}</p>
                     <p> BP : {BP}</p>
-                    <p>Complete the tasks to obtain whitelist</p>
+                    <div className="complete">Complete the tasks to obtain whitelist</div>
                     <div className="tasks">
                         <div className="task-items">Follow <a href="https://x.com/doge_on__base/status/1777039882956706172" onClick={handleTwitterFollow} target="_blank" rel="noopener noreferrer" className='link'>Basebound</a> on X</div> <div className="BP">+1 BP</div> </div>
                     <div className="tasks">
@@ -150,13 +150,13 @@ function Whitelist() {
                     </div>
                    
                 </div>
-            ) 
-            :
+            {/* ) */}
+            {/* :
             <div className="wallet">
             <button className="btn" onClick={connectWallet}> Connect Wallet
           </button>
             </div>
-            }
+            } */}
         </div>
     );
 }

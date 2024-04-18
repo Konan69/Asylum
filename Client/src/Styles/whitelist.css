@@ -1,7 +1,7 @@
 .tasks{
   display: inline-block;
   /* display: flex; */
-  background-color: rgb(72, 225, 239);
+  background-color: #c8ffff;
   border-radius: 30px;
   width: 100%;
   /* padding-left: 10%;
@@ -11,6 +11,7 @@
 .task-items{
   margin-left: 5%;
   display: inline-block;
+  color: black;
   text-align: left;
   left: 0;
   margin-block-start: 0.5em;
@@ -26,4 +27,9 @@
   text-align: right;
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
+}
+.complete{
+  color: black;
+  text-align: center;
+  margin: 4%;
 }

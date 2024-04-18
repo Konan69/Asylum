@@ -4,7 +4,8 @@
   left:0;
   width: 100%;
   padding: 0%;
-  background-color: rgb(31, 153, 240);
+  background: linear-gradient(to right, #005B94 5%, #009BFF, #005B96) ;
+  mix-blend-mode: hard-light;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
