@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { FaRegCopy } from "react-icons/fa";
 import {ethers} from 'ethers'
 import axios from 'axios';
 
@@ -127,7 +128,7 @@ function Whitelist() {
             {connected ? (
                 <div>
                     <p>Your wallet is: {wallet}</p>
-                    <p>your referralId is : {referralId}</p>
+                    <p>Referrals Count: {referralId}</p>
 
                     <div className="Claim-content "> <div className="Claim">Claim Boundlist </div> <div className="totalBP"> Total BP : {BP}</div> </div>
                     <div className="complete">Complete task to obtain whitelist. Must have at least 15 BP(BoundPoints) to be eligible to mint NFT</div>
@@ -139,10 +140,8 @@ function Whitelist() {
                     <div className="tasks">
                         <div className="task-items"><a href="https://x.com/doge_on__base/status/1777039882956706133" onClick={handleIsTweetPosted} target="_blank" rel="noopener noreferrer" className='link'>Post </a>about us on X </div>  <div className="BP">+1 BP</div></div>
                     <div className="tasks">
-                        <div className="task-items">Refer friends to join Basebound [1 bp per successful invite]
-                        <button className ="copy" onClick={() => handleCopyToClipboard(referralLink)}>
-                          <img src="copy-icon.png" alt="Copy to Clipboard" />
-                        </button> </div>
+                        <div className="task-items">Refer friends to join Basebound [1 BP per invite]
+                        <div className="copy-icon" onClick={ () => handleCopyToClipboard(referralLink)}><FaRegCopy /></div></div>
                        </div>
                     </div>
                     <div className="cliaim">

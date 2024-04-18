@@ -76,3 +76,16 @@
   text-align: center;
   margin: 1% 4% 4% 4% ;
 }
+
+.copy-icon {
+  cursor: pointer;
+  width: fit-content;
+  display: inline-block;
+  float: right;
+  margin-right: 8%;
+}
+
+.copy-icon:hover {
+  background-color: rgb(33, 99, 161); 
+  border-radius: 2px;
+}

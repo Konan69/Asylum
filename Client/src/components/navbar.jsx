@@ -7,13 +7,14 @@ function Navbar() {
    
   return (
     <header class = 'header'>
+    <div className="basebound"> BaseBound </div>
     <div className="navbar">
-    <p className="basebound"> BaseBound </p>
-    <Link to ="/">Home</Link>
+     <Link to ="/">Home</Link>
     <a href = "#"> NFT</a>
     <a href = "#"> The Bound</a>
     <a href = "#"> $Bound</a>
     </div>
+   
     </header> 
   )
 }
