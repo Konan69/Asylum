@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
   points: {
     type: Number,
     required:true,
-    default: 9
+    default: 0
   },
   TwitterFollowed : {
     type: Boolean,

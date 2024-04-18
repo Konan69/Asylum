@@ -124,14 +124,13 @@ function Whitelist() {
 
     return (
         <div>
-            {/* {connected ? ( */}
+            {connected ? (
                 <div>
                     <p>Your wallet is: {wallet}</p>
                     <p>your referralId is : {referralId}</p>
-                    <p> BP : {BP}</p>
-                    <div className="Claim"> Claim Boundlist</div>
-                    <div className="complete">Complete task to obtain whitelist. Must have at least 15 BP(BoundPoints) to be eligible to mint NFT</div>
 
+                    <div className="Claim-content "> <div className="Claim">Claim Boundlist </div> <div className="totalBP"> Total BP : {BP}</div> </div>
+                    <div className="complete">Complete task to obtain whitelist. Must have at least 15 BP(BoundPoints) to be eligible to mint NFT</div>
                     <div className= "alltasks">
                     <div className="tasks">
                         <div className="task-items">Follow <a href="https://x.com/doge_on__base/status/1777039882956706172" onClick={handleTwitterFollow} target="_blank" rel="noopener noreferrer" className='link'>Basebound</a> on X</div> <div className="BP">+1 BP</div> </div>
@@ -141,7 +140,7 @@ function Whitelist() {
                         <div className="task-items"><a href="https://x.com/doge_on__base/status/1777039882956706133" onClick={handleIsTweetPosted} target="_blank" rel="noopener noreferrer" className='link'>Post </a>about us on X </div>  <div className="BP">+1 BP</div></div>
                     <div className="tasks">
                         <div className="task-items">Refer friends to join Basebound [1 bp per successful invite]
-                        <button onClick={() => handleCopyToClipboard(referralLink)}>
+                        <button className ="copy" onClick={() => handleCopyToClipboard(referralLink)}>
                           <img src="copy-icon.png" alt="Copy to Clipboard" />
                         </button> </div>
                        </div>
@@ -154,13 +153,13 @@ function Whitelist() {
                     </div>
                    
                 </div>
-            {/* ) */}
-            {/* :
+            ) 
+            :
             <div className="wallet">
             <button className="btn" onClick={connectWallet}> Connect Wallet
           </button>
             </div>
-            } */}
+            } 
         </div>
     );
 }
