@@ -14,14 +14,12 @@ function Home() {
 
 <Swiper
 modules={[Navigation, Pagination,EffectFade,]}
-  spaceBetween={50}
+  // spaceBe/tween={50}
   effect={'fade'}
   // fadeEffect: { crossFade: true }
   slidesPerView={1}
-  direction="horizontal"
   navigation
-  >
-
+>
   <section class="container">
   <div class="Home-Swiper">
     <SwiperSlide>
@@ -65,6 +63,8 @@ modules={[Navigation, Pagination,EffectFade,]}
           <span class="job">Web Developer</span>
         </div>
     </SwiperSlide>
+    <div class="swiper-button-next" ></div>
+    <div class="swiper-button-prev"></div>
     </div> 
 </section>
 </Swiper>

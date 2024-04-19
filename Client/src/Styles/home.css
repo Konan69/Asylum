@@ -2,13 +2,31 @@
 .swiper-slide:not(.swiper-slide-active){
   opacity: 0 !important;
 }
+.swiper-wrapper{
+  width:80vw;
+}
+
+.swiper-slide {
+  width:fit-content;
+}
+
+.container {
+  width: 100vw; /* Set the width to 100% of the viewport width */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.Home-Swiper {
+  width: 100vw; /* Set the width to 100% of the viewport width */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
 
 .card {
   display: flex;
   background: linear-gradient(#0F6b99, #1AB2FF, #4DC3FF, #3D7A99);
   mix-blend-mode: normal;
   flex-direction: row;
-  width:100vw;
+  width:50vw;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 } 
 
 .image-container {
@@ -27,3 +45,12 @@
   width: 40%;
 }
 
+
+.swiper-button-prev {
+  /* background-image: url("../assets/prev.svg"); */
+}
+
+.swiper-button-next {
+  /* background-image: url("../assets/next.svg"); */
+  margin-right: 20%;
+}
