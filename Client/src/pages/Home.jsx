@@ -1,6 +1,9 @@
-import React from "react";
-import '../Styles/home.css'
-import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-kit';
+import {React, useRef, useEffect} from "react";
+import 'swiper/css/effect-fade';
+import '../Styles/home.css';
+import { Swiper, SwiperSlide } from 'swiper/react'
+import img from "../assets/img.jpeg"
+import { Navigation, EffectFade, Pagination } from 'swiper/modules';
 import { Link } from "react-router-dom";
 
 function Home() { 
@@ -8,32 +11,63 @@ function Home() {
   // <div>
   // <Link to ="/whitelist"> join whitelist </Link>
   // </div>
-  
-  <MDBCarousel showIndicators showControls fade touch={false}>
-  <MDBCarouselItem itemId={1}>
-    <img src='https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg' className='d-block w-100' alt='...' />
-    <MDBCarouselCaption>
-      <h5>First slide label</h5>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </MDBCarouselCaption>
-  </MDBCarouselItem>
 
-  <MDBCarouselItem itemId={2}>
-    <img src='https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg' className='d-block w-100' alt='...' />
-    <MDBCarouselCaption>
-      <h5>Second slide label</h5>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </MDBCarouselCaption>
-  </MDBCarouselItem>
+<Swiper
+modules={[Navigation, Pagination,EffectFade,]}
+  spaceBetween={50}
+  effect={'fade'}
+  // fadeEffect: { crossFade: true }
+  slidesPerView={1}
+  direction="horizontal"
+  navigation
+  >
 
-  <MDBCarouselItem itemId={3}>
-    <img src='https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg' className='d-block w-100' alt='...' />
-    <MDBCarouselCaption>
-      <h5>Third slide label</h5>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-    </MDBCarouselCaption>
-  </MDBCarouselItem>
-</MDBCarousel>
+  <section class="container">
+  <div class="Home-Swiper">
+    <SwiperSlide>
+      <div className="card">
+      <div className="image-container">
+      <img src={img} alt="img" className="image"/> 
+      </div>
+        <div className="caption">
+        We're leveraging NFT technology to cultivate a tight-knit 
+        community of individuals who share experiences navigating the 
+        impact of web3 culture on mental well-being.
+        </div>
+      </div>
+     
+    </SwiperSlide>
+    <SwiperSlide>
+        <img src="#" alt="" class="image" />
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam,
+          saepe provident dolorem a quaerat quo error facere nihil deleniti
+          eligendi ipsum adipisci, fugit, architecto amet asperiores
+          doloremque deserunt eum nemo.
+        </p>
+        <i class="bx bxs-quote-alt-left quote-icon"></i>
+        <div class="details">
+          <span class="name"> Lotter</span>
+          <span class="job">Web Developer</span>
+        </div>
+    </SwiperSlide>
+    <SwiperSlide>
+        <img src="#" alt="" class="image" />
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam,
+          saepe provident dolorem a quaerat quo error facere nihil deleniti
+          eligendi ipsum adipisci, fugit, architecto amet asperiores
+          doloremque deserunt eum nemo.
+        </p>
+        <i class="bx bxs-quote-alt-left quote-icon"></i>
+        <div class="details">
+          <span class="name">Marnie Lotter</span>
+          <span class="job">Web Developer</span>
+        </div>
+    </SwiperSlide>
+    </div> 
+</section>
+</Swiper>
   )
 }
 
