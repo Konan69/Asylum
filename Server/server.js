@@ -17,7 +17,8 @@ app.use(express.json())
 const usersRouter = require('./Router/users')
 
 app.use("/api/users", usersRouter)
-app.get('/', req,res => {
+
+app.get('/', (req,res) => {
   res.json("hello")
 })
 
