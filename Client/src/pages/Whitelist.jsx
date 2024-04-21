@@ -16,6 +16,7 @@ function Whitelist() {
     const [showAlreadyWl, setShowAlreadywl] = useState(false);
     const [showNotEnoughPointsDiv, setShowNotEnoughPointsDiv] = useState(false);
 
+    const referralNo =responseObj?.referrals
     const referralId = responseObj?.id;
     const whitelistStatus = responseObj?.Whitelist
     const location = useLocation();
@@ -128,7 +129,7 @@ function Whitelist() {
             {connected ? (
                 <>
                     <div className="addy">Your wallet is: {wallet}</div>
-                    <p>Referrals Count: {referralId}</p>
+                    <p>Referrals Count: {referralNo}</p>
 
                     <div className="Claim-content "> <div className="Claim">Claim Boundlist </div> <div className="totalBP"> Total BP : {BP}</div> </div>
                     <div className="complete">Complete task to obtain whitelist. Must have at least 15 BP(BoundPoints) to be eligible to mint NFT</div>
