@@ -66,10 +66,10 @@
 }
 .totalBP {
   color: black;
-  margin-right:2%;
+  margin-right:3%;
   margin-left:auto ;
-  display: inline-block;
-  width:fit-content;
+  display: flex;
+  width:20%;
   float: right;
   text-align: right;
   margin-block-start: 0.5em;

@@ -20,7 +20,7 @@ function Whitelist() {
     const referralId = responseObj?.id;
     const whitelistStatus = responseObj?.Whitelist
     const location = useLocation();
-    const referralLink = `https://localhost:5173/whitelist?r=${referralId}`
+    const referralLink = `https://asylum-frontend.vercel.app/whitelist?r=${referralId}`
     const queryParams = new URLSearchParams(location.search);
     const r = queryParams.get('r'); // Accessing the query parameter 'r'
     // console.log(responseObj["TwitterFollowed"])
@@ -132,7 +132,7 @@ function Whitelist() {
                     <div className="addy">Your wallet is: {wallet}</div>
                     <p>Referrals Count: {referralNo}</p>
 
-                    <div className="Claim-content "> <div className="Claim">Claim Boundlist </div> <div className="totalBP"> Total BP : {BP}</div> </div>
+                    <div className="Claim-content "> <div className="Claim">Claim Boundlist </div> <div className="totalBP">  BP : {BP}</div> </div>
                     <div className="complete">Complete task to obtain whitelist. Must have at least 15 BP(BoundPoints) to be eligible to mint NFT</div>
                     <div className= "alltasks">
                     <div className="tasks">
