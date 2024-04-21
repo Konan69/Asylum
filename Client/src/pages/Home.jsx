@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import img from "../assets/img.jpeg"
 import { Navigation, EffectFade, Pagination } from 'swiper/modules';
 import { Link } from "react-router-dom";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 
 function Home() { 
   const swiperRef = useRef(null);
