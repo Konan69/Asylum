@@ -1,6 +1,9 @@
 
 .wl-page{
-  width:fit-content
+  /* width:100vw */
+}
+.wl-page p {
+  padding-left: 2%;
 }
 .alltasks {
   display: flex;
@@ -8,7 +11,10 @@
   align-items: center; /* Center items horizontally */
 }
 
-
+.addy {
+  padding-left: 2%;
+  font-size: 14px;
+}
 .tasks{
   /* display: inline-block; */
 
@@ -138,6 +144,7 @@
   .tasks {
     width: 95%;
   }
+
 
   .task-items {
     font-size: 14px; 
