@@ -15,8 +15,8 @@ function Whitelist() {
     const [showClaimedDiv, setShowClaimedDiv] = useState(false);
     const [showAlreadyWl, setShowAlreadywl] = useState(false);
     const [showNotEnoughPointsDiv, setShowNotEnoughPointsDiv] = useState(false);
+    const [referralNo, setReferralNo] = useState(0);
 
-    const referralNo =responseObj?.referrals
     const referralId = responseObj?.id;
     const whitelistStatus = responseObj?.Whitelist
     const location = useLocation();
@@ -43,6 +43,7 @@ function Whitelist() {
         console.log('Wallet address saved successfully.');
         setResponseObj(response.data)
         setBP(response.data.points)
+        setReferralNo(response.data.referrals)
       }
     } catch (error) {
       console.error('Error connecting wallet:', error);
