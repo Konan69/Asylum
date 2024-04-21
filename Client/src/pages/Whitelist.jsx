@@ -37,7 +37,7 @@ function Whitelist() {
         console.log(r)
 
       // Make the post request to save the wallet address
-      const response = await axios.post(`http://localhost:8080/api/users/`, { wallet: _walletAddress }, {params: {r : r}});
+      const response = await axios.post(`https://asylum-backend.vercel.app/api/users/`, { wallet: _walletAddress }, {params: {r : r}});
       if (response.status === 200) {
         console.log('Wallet address saved successfully.');
         setResponseObj(response.data)
@@ -56,7 +56,7 @@ function Whitelist() {
 
     const addPoints = async () => {
       try {
-      const AP = await axios.post("http://localhost:8080/api/users/addpoints", { wallet: wallet} )
+      const AP = await axios.post("https://asylum-backend.vercel.app/api/users/addpoints", { wallet: wallet} )
       if (AP.status === 200) {
         console.log('points added');
         setBP(AP.data.points)
@@ -71,7 +71,7 @@ function Whitelist() {
       if(!whitelistStatus) {
         if (responseObj.points >= 15 ){
           try {
-          const updateWl = await axios.post(`http://localhost:8080/api/users/claim-wl`, { wallet: wallet })
+          const updateWl = await axios.post(`https://asylum-backend.vercel.app/api/users/claim-wl`, { wallet: wallet })
           if (updateWl.status === 200) {
           console.log('whitelist updated.');
           setShowClaimedDiv(true)
@@ -91,7 +91,7 @@ function Whitelist() {
 
     // logic to handle db commpletion of task and saving stat
   const completeTask =  async (taskName) => {
-        const result = await axios.post('http://localhost:8080/api/users/updatetask', {wallet: wallet, taskName : taskName})
+        const result = await axios.post('https://asylum-backend.vercel.app/api/users/updatetask', {wallet: wallet, taskName : taskName})
         addPoints()
         setResponseObj(result.data)
       }

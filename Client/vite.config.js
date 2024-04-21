@@ -7,7 +7,7 @@ export default defineConfig({
     proxy: {
       // Proxy configuration
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'https://asylum-backend.vercel.app',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')}}}
         ,
