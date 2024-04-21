@@ -1,4 +1,7 @@
 
+.wl-page{
+  width:fit-content
+}
 .alltasks {
   display: flex;
   flex-direction: column; /* Stack items vertically */
@@ -99,4 +102,66 @@
   display: flex;
   flex-direction: column; 
   align-items: center; 
+}
+
+.complete {
+  color: black;
+  text-align: center;
+  margin: 1% 4% 4% 4%;
+  font-size: clamp(8px, 15px, 24px); /* Updated font size */
+  font-weight: 450;
+}
+
+.copy-icon {
+  cursor: pointer;
+  width: fit-content;
+  display: inline-block;
+  float: right;
+  margin-right: 8%;
+}
+
+.copy-icon:hover {
+  background-color: rgb(33, 99, 161);
+  border-radius: 2px;
+}
+
+.claim-btn {
+  padding-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Media queries for mobile responsiveness */
+@media screen and (max-width: 768px) {
+
+  .tasks {
+    width: 95%;
+  }
+
+  .task-items {
+    font-size: 14px; 
+  }
+
+  .BP {
+    font-size: 14px; 
+  }
+
+  .Claim {
+    /* margin-top: 10px; */
+    font-size: 20px; 
+  }
+
+  .totalBP {
+    font-size: 14px;
+  }
+
+  .claim-btn{
+   margin-top: 10px;
+  }
+
+  .complete {
+    font-size: 18px; 
+    margin: 1% 2% 4% 2%;
+  }
 }

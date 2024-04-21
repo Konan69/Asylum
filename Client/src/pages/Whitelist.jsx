@@ -124,10 +124,10 @@ function Whitelist() {
     };
 
     return (
-        <div>
+        <div className="wl-page">
             {connected ? (
-                <div>
-                    <p>Your wallet is: {wallet}</p>
+                <>
+                    <div className="addy">Your wallet is: {wallet}</div>
                     <p>Referrals Count: {referralId}</p>
 
                     <div className="Claim-content "> <div className="Claim">Claim Boundlist </div> <div className="totalBP"> Total BP : {BP}</div> </div>
@@ -151,7 +151,7 @@ function Whitelist() {
                        {showAlreadyWl && <div style={{ marginTop: '10px' }}>Wallet Already Whitelisted</div>}
                     </div>
                    
-                </div>
+                </>
             ) 
             :
             <div className="wallet">
