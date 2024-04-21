@@ -25,7 +25,7 @@ app.get('/', (req,res) => {
 
 
 // db connect 
-mongoose.connect(mongo)
+mongoose.connect("mongodb+srv://kixeyems0:wAjlc6D4pesyPEAV@cluster0.kw5stww.mongodb.net/cluster0?retryWrites=true&w=majority")
 .then(()=> console.log('connected to db'))
 .catch((err)=> console.log(err))
 
