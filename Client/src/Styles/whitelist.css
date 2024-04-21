@@ -1,0 +1,167 @@
+
+.wl-page{
+  width:fit-content
+}
+.alltasks {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+}
+
+
+.tasks{
+  /* display: inline-block; */
+
+  background-color: rgb(200, 255, 255, 0.75);
+  border-radius: 30px;
+  width: 70%;
+  /* padding-left: 10%;
+  padding-right: 10%;  */
+  margin: 10px;
+}
+.task-items{
+  margin-left: 5%;
+  display: inline-block;
+  color: black;
+  text-align: left;
+  margin-block-start: 0.5em;
+  width:fit-content;
+  margin-block-end: 0.5em;
+}
+ .BP {
+  color: black;
+  margin-right: 5%;
+  display: inline-block;
+  width:fit-content;
+  float: right;
+  text-align: right;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+
+.Claim-content {
+  display: flex;
+  flex-direction: row; /* Stack items vertically */
+  justify-content: center;
+
+
+  align-items: center; /* Center items horizontally */
+  width: 100%;
+
+}
+
+.Claim {
+  display: flex;
+  justify-content: center;
+  text-align:center;
+  margin-left: 20%;
+  color: black;
+  margin-block-start: 0.5em;
+  width:75%;
+  margin-block-end: 0.5em;
+  font-size: 24px;
+  font-weight: bold;
+
+}
+.totalBP {
+  color: black;
+  margin-right:2%;
+  margin-left:auto ;
+  display: inline-block;
+  width:fit-content;
+  float: right;
+  text-align: right;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+.complete{
+  color: black;
+  text-align: center;
+  margin: 1% 4% 4% 4% ;
+  font-size: clamp(8px, 15px, 30px);
+  font-weight: 450;
+}
+
+.copy-icon {
+  cursor: pointer;
+  width: fit-content;
+  display: inline-block;
+  float: right;
+  margin-right: 8%;
+}
+
+.copy-icon:hover {
+  background-color: rgb(33, 99, 161); 
+  border-radius: 2px;
+}
+
+.claim-btn {
+  padding-top: 2%;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+}
+
+.complete {
+  color: black;
+  text-align: center;
+  margin: 1% 4% 4% 4%;
+  font-size: clamp(8px, 15px, 24px); /* Updated font size */
+  font-weight: 450;
+}
+
+.copy-icon {
+  cursor: pointer;
+  width: fit-content;
+  display: inline-block;
+  float: right;
+  margin-right: 8%;
+}
+
+.copy-icon:hover {
+  background-color: rgb(33, 99, 161);
+  border-radius: 2px;
+}
+
+.claim-btn {
+  padding-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Media queries for mobile responsiveness */
+@media screen and (max-width: 768px) {
+
+  .tasks {
+    width: 95%;
+  }
+
+  .task-items {
+    font-size: 14px; 
+  }
+
+  .BP {
+    font-size: 14px; 
+  }
+
+  .Claim {
+    /* margin-top: 10px; */
+    font-size: 20px; 
+  }
+
+  .totalBP {
+    font-size: 14px;
+  }
+
+  .claim-btn{
+   margin-top: 10px;
+  }
+
+  .complete {
+    font-size: 18px; 
+    margin: 1% 2% 4% 2%;
+  }
+}
