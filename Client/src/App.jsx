@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { HashRouter as Router } from "react-router-dom"
 import {
   createBrowserRouter,
   RouterProvider,
@@ -37,10 +38,6 @@ const router = createBrowserRouter([
       path: "/whitelist",
       element: <Whitelist/>
     },
-    // {
-    //   path: "/whitelist/r/:id", // Define the dynamic parameter ":id"
-    //   element: <Whitelist/> // Render the Whitelist component
-    // }
   ]
   },
   {
@@ -56,12 +53,12 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <Router>
       <div className ="App">
         <RouterProvider router ={router} />
       </div>
 
-    </>
+    </Router>
   )
 }
 
