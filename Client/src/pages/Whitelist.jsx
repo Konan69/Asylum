@@ -50,7 +50,7 @@ function Whitelist() {
     }
       } else {
         // Disconnect the wallet
-        // window.ethereum.selectedAddress = null;
+        window.ethereum.selectedAddress = null;
         setConnected(false);
       }
 
