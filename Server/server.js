@@ -18,7 +18,7 @@ const usersRouter = require('./Router/users')
 
 app.use("/api/users", usersRouter)
 
-app.get('/', (req,res) => {
+app.get('/api', (req,res) => {
   res.json("hello")
 })
 
