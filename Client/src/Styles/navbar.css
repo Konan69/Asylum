@@ -4,7 +4,7 @@
   top:0;
   left:0;
   width: 100%;
-  padding: 2.5% 0% 2.5%;
+  padding: 2% 0%;
   background: linear-gradient(to right, #005B94 5%, #009BFF, #005B96) ;
   mix-blend-mode: hard-light;
   justify-content: space-between;
@@ -15,7 +15,11 @@
 .basebound {
   display:inline-block;
   padding-left: 5%;
-  font-weight: 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+.basebound a {
+  color: black;
 }
 
 .navbar a {
@@ -29,4 +33,23 @@
   color: black;
   width: fit-content;
   padding-right: 2.5%;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+  border-radius: 0%;
+  box-shadow: none;
+  padding: 0.2em 0.4em
+}
+
+.nav-button:hover {
+  color: blue; /* Change color on hover if needed */
+  background-color: transparent;
+  border-color: #009BFF;
+}
+.nav-button::after {
+  border-color: transparent;
 }

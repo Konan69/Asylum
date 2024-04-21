@@ -1,22 +1,20 @@
+
+
 import React from "react";
-
-import '../Styles/navbar.css'
 import { Link } from "react-router-dom";
+import '../Styles/navbar.css'
 
-function Navbar() {
-   
+function Navbar({ handleNavButtonClick }) {
   return (
-    <header class = 'header'>
-    <div className="basebound"> BaseBound </div>
-    <div className="navbar">
-     <Link to ="/">Home</Link>
-    <a href = "#"> NFT</a>
-    <a href = "#"> The Bound</a>
-    <a href = "#"> $Bound</a>
-    </div>
-   
-    </header> 
-  )
+    <header className="header">
+      <div className="basebound"> <Link to="/">BASEBOUND</Link> </div>
+      <div className="navbar">
+        <button className="nav-button" onClick={() => handleNavButtonClick(1)}>NFT</button>
+        <button className="nav-button" onClick={() => handleNavButtonClick(2)}>The Bound</button>
+        <button className="nav-button" onClick={() => handleNavButtonClick(3)}>$BOUND</button>
+      </div>
+    </header>
+  );
 }
 
 export default Navbar;
