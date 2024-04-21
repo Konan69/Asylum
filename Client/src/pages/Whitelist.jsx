@@ -48,9 +48,9 @@ function Whitelist() {
       console.error('Error connecting wallet:', error);
     }
       } else {
-        // // Disconnect the wallet
+        // Disconnect the wallet
         // window.ethereum.selectedAddress = null;
-        // setConnected(false);
+        setConnected(false);
       }
 
     }
