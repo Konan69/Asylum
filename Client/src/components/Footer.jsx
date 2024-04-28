@@ -7,9 +7,7 @@ function Footer() {
    
   return (
     <footer class = 'footer'>
-    <div className="socials"> 
-    <FaXTwitter />
-    </div>
+    <a className= 'icon' href="https://twitter.com"> <FaXTwitter /></a>
     </footer> 
   )
 }
