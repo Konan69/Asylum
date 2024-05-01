@@ -28,7 +28,12 @@
 
 .card {
   display: flex;
-  background: linear-gradient( #1AB2FF 26%, #4DC3FF 72%, #4BBBF5 75%, #3D7A99 100%);
+  /* background: linear-gradient( #1AB2FF 26%, #4DC3FF 72%, #4BBBF5 75%, #3D7A99 100%); */
+  background:  linear-gradient(
+    165deg,
+    #34d0db 60%,
+    #7fc3eb 100%
+  );
   flex-direction: row;
   align-items: center;
   justify-content: center;

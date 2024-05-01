@@ -32,7 +32,6 @@
   color: black;
   width: fit-content;
   font-size: 18px;
-  padding-right: 3%;
 }
 
 .nav-button {
@@ -42,7 +41,8 @@
   color: black;
   border-radius: 0%;
   box-shadow: none;
-  padding: 0.3em 0.9em
+  padding: 0.3em 0.9em;
+
 }
 
 
@@ -64,6 +64,7 @@
   color: black;
   width: fit-content;
   font-size: 14px;
+  padding-right: 7%;
 }
 
 
@@ -74,7 +75,7 @@
   color: black;
   border-radius: 0%;
   box-shadow: none;
-  padding: 0.2em 0.4em
+  padding: 0.2em 0.4em;
 }
 
   }
