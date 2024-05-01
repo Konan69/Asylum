@@ -86,8 +86,6 @@
   padding-right: 30px;
 }
 
-
-
 /* .swiper-button-prev {
   background-image: url("../assets/prev.svg");
 } */
@@ -103,10 +101,10 @@
     height: 80%;
   }
   .card {
-    margin-top: 15%;
+    margin-top: 15%; 
     flex-direction: column;
     height: fit-content;
-    padding: 20px;
+    padding-bottom:0px
   }
   
   .image-container {
@@ -124,6 +122,10 @@
   .text-container {
     width: 100%;
   }
+  .Join-wl{
+    padding-top: 2.5%;
+  }
+
   
   .heading {
     font-size: 24px;
